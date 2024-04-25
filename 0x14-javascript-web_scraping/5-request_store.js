@@ -1,9 +1,17 @@
 #!/usr/bin/node
+// lorem ipsum
+
 const request = require('request');
 const fs = require('fs');
 
-request(process.argv[2], function (err, response, body) {
-  if (err == null) {
-    fs.writeFileSync(process.argv[3], body);
+request.get(process.argv[2], (error, response, body) => {
+  if (error) {
+    console.log(error);
+  } else {
+    fs.writeFile(process.argv[3], body, 'utf-8', (error) => {
+      if (error) {
+        console.log(error);
+      }
+    });
   }
 });
